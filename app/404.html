@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8" />
+    <title>Google Phone Gallery</title>
+    <link
+      rel="stylesheet"
+      href="bower_components/bootstrap/dist/css/bootstrap.css"
+    />
+    <link rel="stylesheet" href="app.css" />
+    <script src="bower_components/angular/angular.js"></script>
+
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="Controller">
+    <ul class="weekdays">
+      <li>Mo</li>
+      <li>Tu</li>
+      <li>We</li>
+      <li>Th</li>
+      <li>Fr</li>
+      <li>Sa</li>
+      <li>Su</li>
+    </ul>
+
+    <ul class="days">
+      <li
+        ng-click="addNew(i)"
+        class="btn btn-primary"
+        data-toggle="modal"
+        data-target="#myModal"
+        data-whatever="@mdo"
+        ng-repeat="i in days "
+      >
+        {{ i }}
+        <div class="taskName">{{ rendernoftask(i) }}</div>
+      </li>
+    </ul>
+    <div
+      class="modal fade"
+      id="myModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModal">New Task</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Name:</label>
+                <textarea ng-model='name' type="text" class="form-control" id="recipient-name">{{name}}</textarea>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label"
+                  >Description:</label
+                >
+                <textarea ng-model='description' class="form-control" id="message-text">{{description}}</textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              ng-click="close('myModal')"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button ng-click="save()" type="button" class="btn btn-primary">
+              save
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="myRedactionModal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="myRedactionModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="myModal">New Task</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <h1 for="recipient-name" class="col-form-label">
+                  Name:{{ buff }}
+                </h1>
+              </div>
+              <div class="form-group">
+                <label for="message-text" class="col-form-label"
+                  >Description:</label
+                >
+
+                <!-- ng-bind="rendernoftaskDescription(buff)" -->
+                <textarea
+                  ng-model="descriptionNew"
+                  class="form-control"
+                  id="message-text"
+                ></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              ng-click="close('myRedactionModal')"
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button
+              ng-click="Redact(descriptionNew,buff)"
+              type="button"
+              class="btn btn-primary"
+            >
+              save
+            </button>
+            <button
+              ng-click="delete(buff)"
+              type="button"
+              class="btn btn-primary"
+            >
+              delete
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
